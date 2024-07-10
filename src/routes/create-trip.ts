@@ -7,6 +7,9 @@ import nodemailer from "nodemailer"
 import { z } from "zod"
 import { prisma } from "../lib/prisma";
 import { getMailClient } from "../lib/mail";
+// import { Resend } from 'resend';
+
+// const resend = new Resend('re_CBj1vmfj_Ayi5RXPjss6nSsdSFYhEFrRC');
 
 dayjs.locale('pt-br')
 dayjs.extend(localizedFormat)
@@ -79,6 +82,20 @@ export async function createTrip(app: FastifyInstance) {
     })
 
     console.log(nodemailer.getTestMessageUrl(message))
+
+
+    // const { data, error } = await resend.emails.send({
+    //   from: 'Victor <onboarding@resend.dev>',
+    //   to: ['prado.victor1005@gmail.com'],
+    //   subject: 'Teste resend',
+    //   html: '<strong>It works!</strong>',
+    // });
+
+    // if (error) {
+    //   return console.error({ error });
+    // }
+
+    // console.log({ data });
 
     return { tripId: trip.id }
   })
