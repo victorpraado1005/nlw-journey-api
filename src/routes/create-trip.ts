@@ -1,18 +1,16 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import dayjs from "dayjs";
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-import "dayjs/locale/pt-br"
+
 import nodemailer from "nodemailer"
 import { z } from "zod"
 import { prisma } from "../lib/prisma";
 import { getMailClient } from "../lib/mail";
+import dayjs from "dayjs";
 // import { Resend } from 'resend';
 
 // const resend = new Resend('re_CBj1vmfj_Ayi5RXPjss6nSsdSFYhEFrRC');
 
-dayjs.locale('pt-br')
-dayjs.extend(localizedFormat)
+
 
 export async function createTrip(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post('/trips', {
@@ -63,25 +61,25 @@ export async function createTrip(app: FastifyInstance) {
     const formattedStartDate = dayjs(starts_at).format('LL')
     const formattedEndDate = dayjs(ends_at).format('LL')
 
-    console.log(formattedStartDate)
-    console.log(formattedEndDate)
+    // console.log(formattedStartDate)
+    // console.log(formattedEndDate)
 
-    const mail = await getMailClient()
+    // const mail = await getMailClient()
 
-    const message = await mail.sendMail({
-      from: {
-        name: 'Equipe plann.er',
-        address: 'oi@plann.er.com.br',
-      },
-      to: {
-        name: owner_name,
-        address: owner_email
-      },
-      subject: 'Testando envio de e-mail',
-      html: '<p>Teste do envio de e-mail</p>'
-    })
+    // const message = await mail.sendMail({
+    //   from: {
+    //     name: 'Equipe plann.er',
+    //     address: 'oi@plann.er.com.br',
+    //   },
+    //   to: {
+    //     name: owner_name,
+    //     address: owner_email
+    //   },
+    //   subject: 'Testando envio de e-mail',
+    //   html: '<p>Teste do envio de e-mail</p>'
+    // })
 
-    console.log(nodemailer.getTestMessageUrl(message))
+    // console.log(nodemailer.getTestMessageUrl(message))
 
 
     // const { data, error } = await resend.emails.send({
